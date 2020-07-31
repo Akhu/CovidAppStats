@@ -3,23 +3,46 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		922ADD0924CF481000C7C607 /* SearchBarText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922ADD0824CF481000C7C607 /* SearchBarText.swift */; };
+		9270AF5424D426A300A2780A /* CountrySelectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9270AF5324D426A300A2780A /* CountrySelectionRow.swift */; };
+		9270AF5724D426E300A2780A /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9270AF5624D426E300A2780A /* Country.swift */; };
 		927EC4F824BB6C5B0007CB60 /* CovidStatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927EC4F724BB6C5B0007CB60 /* CovidStatApp.swift */; };
 		927EC4FA24BB6C5B0007CB60 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927EC4F924BB6C5B0007CB60 /* ContentView.swift */; };
 		927EC4FC24BB6C5D0007CB60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 927EC4FB24BB6C5D0007CB60 /* Assets.xcassets */; };
 		927EC4FF24BB6C5D0007CB60 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 927EC4FE24BB6C5D0007CB60 /* Preview Assets.xcassets */; };
+		92C9AF4424D46194003BC471 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C9AF4324D46194003BC471 /* ButtonStyles.swift */; };
+		92C9AF4624D4658C003BC471 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C9AF4524D4658C003BC471 /* Color.swift */; };
+		92E5692724C490E60080E628 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5692624C490E60080E628 /* Network.swift */; };
+		92E5692E24C49B200080E628 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 92E5692D24C49B200080E628 /* SwiftUICharts */; };
+		92E5693124C49F5E0080E628 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5693024C49F5E0080E628 /* APICaller.swift */; };
+		92E5693324C4B9C90080E628 /* CountrySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5693224C4B9C90080E628 /* CountrySelectionView.swift */; };
+		92E5693524C4BA320080E628 /* AllCountries.json in Resources */ = {isa = PBXBuildFile; fileRef = 92E5693424C4BA320080E628 /* AllCountries.json */; };
+		92E5693824C4BA9B0080E628 /* FileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5693724C4BA9B0080E628 /* FileReader.swift */; };
+		92E5693A24C4BABC0080E628 /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5693924C4BABC0080E628 /* Countries.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		922ADD0824CF481000C7C607 /* SearchBarText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarText.swift; sourceTree = "<group>"; };
+		9270AF5324D426A300A2780A /* CountrySelectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionRow.swift; sourceTree = "<group>"; };
+		9270AF5624D426E300A2780A /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		927EC4F424BB6C5B0007CB60 /* CovidStat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovidStat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		927EC4F724BB6C5B0007CB60 /* CovidStatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidStatApp.swift; sourceTree = "<group>"; };
 		927EC4F924BB6C5B0007CB60 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		927EC4FB24BB6C5D0007CB60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		927EC4FE24BB6C5D0007CB60 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		927EC50024BB6C5D0007CB60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92C9AF4324D46194003BC471 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		92C9AF4524D4658C003BC471 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		92E5692624C490E60080E628 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		92E5693024C49F5E0080E628 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		92E5693224C4B9C90080E628 /* CountrySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionView.swift; sourceTree = "<group>"; };
+		92E5693424C4BA320080E628 /* AllCountries.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AllCountries.json; sourceTree = "<group>"; };
+		92E5693724C4BA9B0080E628 /* FileReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileReader.swift; sourceTree = "<group>"; };
+		92E5693924C4BABC0080E628 /* Countries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countries.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,16 +50,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92E5692E24C49B200080E628 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9270AF5524D426AA00A2780A /* Country */ = {
+			isa = PBXGroup;
+			children = (
+				92E5693224C4B9C90080E628 /* CountrySelectionView.swift */,
+				9270AF5324D426A300A2780A /* CountrySelectionRow.swift */,
+				9270AF5624D426E300A2780A /* Country.swift */,
+				92E5693924C4BABC0080E628 /* Countries.swift */,
+			);
+			path = Country;
+			sourceTree = "<group>";
+		};
 		927EC4EB24BB6C5B0007CB60 = {
 			isa = PBXGroup;
 			children = (
+				92C9AF4524D4658C003BC471 /* Color.swift */,
+				92C9AF4324D46194003BC471 /* ButtonStyles.swift */,
 				927EC4F624BB6C5B0007CB60 /* CovidStat */,
+				9270AF5524D426AA00A2780A /* Country */,
+				922ADD0824CF481000C7C607 /* SearchBarText.swift */,
+				92E5693624C4BA3E0080E628 /* Storage */,
+				92E5692F24C49F450080E628 /* Network */,
 				927EC4F524BB6C5B0007CB60 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,6 +98,7 @@
 				927EC4FB24BB6C5D0007CB60 /* Assets.xcassets */,
 				927EC50024BB6C5D0007CB60 /* Info.plist */,
 				927EC4FD24BB6C5D0007CB60 /* Preview Content */,
+				92E5692624C490E60080E628 /* Network.swift */,
 			);
 			path = CovidStat;
 			sourceTree = "<group>";
@@ -67,6 +109,23 @@
 				927EC4FE24BB6C5D0007CB60 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		92E5692F24C49F450080E628 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				92E5693024C49F5E0080E628 /* APICaller.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		92E5693624C4BA3E0080E628 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				92E5693424C4BA320080E628 /* AllCountries.json */,
+				92E5693724C4BA9B0080E628 /* FileReader.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +144,9 @@
 			dependencies = (
 			);
 			name = CovidStat;
+			packageProductDependencies = (
+				92E5692D24C49B200080E628 /* SwiftUICharts */,
+			);
 			productName = CovidStat;
 			productReference = 927EC4F424BB6C5B0007CB60 /* CovidStat.app */;
 			productType = "com.apple.product-type.application";
@@ -112,6 +174,9 @@
 				Base,
 			);
 			mainGroup = 927EC4EB24BB6C5B0007CB60;
+			packageReferences = (
+				92E5692C24C49B200080E628 /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = 927EC4F524BB6C5B0007CB60 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				927EC4FF24BB6C5D0007CB60 /* Preview Assets.xcassets in Resources */,
+				92E5693524C4BA320080E628 /* AllCountries.json in Resources */,
 				927EC4FC24BB6C5D0007CB60 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,8 +204,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92E5693824C4BA9B0080E628 /* FileReader.swift in Sources */,
 				927EC4FA24BB6C5B0007CB60 /* ContentView.swift in Sources */,
+				92E5692724C490E60080E628 /* Network.swift in Sources */,
+				92E5693124C49F5E0080E628 /* APICaller.swift in Sources */,
 				927EC4F824BB6C5B0007CB60 /* CovidStatApp.swift in Sources */,
+				92C9AF4624D4658C003BC471 /* Color.swift in Sources */,
+				92E5693A24C4BABC0080E628 /* Countries.swift in Sources */,
+				922ADD0924CF481000C7C607 /* SearchBarText.swift in Sources */,
+				9270AF5424D426A300A2780A /* CountrySelectionRow.swift in Sources */,
+				9270AF5724D426E300A2780A /* Country.swift in Sources */,
+				92C9AF4424D46194003BC471 /* ButtonStyles.swift in Sources */,
+				92E5693324C4B9C90080E628 /* CountrySelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +404,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		92E5692C24C49B200080E628 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		92E5692D24C49B200080E628 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 92E5692C24C49B200080E628 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 927EC4EC24BB6C5B0007CB60 /* Project object */;
 }
