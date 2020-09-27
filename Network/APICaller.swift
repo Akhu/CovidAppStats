@@ -21,13 +21,7 @@ class Countries : ObservableObject{
     var cancellable : Set<AnyCancellable> = Set()
     
     init(_ fromFile: Bool = false) {
-        if fromFile {
-            if let countries = try? mockLoadCountries() {
-                countryList = countries
-            }
-        } else {
-            fetchCountryList()
-        }
+        fetchCountryList()
     }
     
     func fetchCountryList() {

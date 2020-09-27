@@ -11,21 +11,6 @@ enum IOError: LocalizedError {
     case fileNotFound
 }
 
-func mockLoadCountries() throws -> [Country]  {
-    if let dataToDecode = FileReader.getContent(ofFileName: "AllCountries", withExtension: "json") {
-        do {
-            let receiptList = try JSONDecoder().decode([Country].self, from: dataToDecode)
-            
-            return receiptList.sorted { $0.name < $1.name }
-        }catch let error as NSError {
-            print(error.description)
-            throw error
-        }
-    }else {
-        throw IOError.fileNotFound
-    }
-    
-}
 
 func loadAllLocale() -> [Country] {
     let list:[Country] = Locale.availableIdentifiers.compactMap { identifier in
