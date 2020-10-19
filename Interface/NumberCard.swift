@@ -23,9 +23,7 @@ struct NumberCard: View {
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding(EdgeInsets(top: 24, leading: 12, bottom: 24, trailing: 12))
-                    .background(
-                        RoundedRectangle(cornerRadius: 14.0, style: .continuous).fill(color)
-                        )
+                    .background(RoundedRectangle(cornerRadius: 14.0, style: .continuous).fill(color))
                 }
                 Text(label)
                     .font(.system(size: 14, weight: .medium, design: .default))

@@ -24,7 +24,7 @@ struct GlobalStatNumberSection: View {
             //Todo : Bigger version and that take all the space
             NumberCard(value: cases, label: "Cases", color: Color.customPurple, labelColor: Color.purpleShadow)
                 
-        }.frame(maxHeight: 270)
+        }.frame(maxHeight: 280)
     }
 }
 

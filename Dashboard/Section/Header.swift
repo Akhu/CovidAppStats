@@ -16,10 +16,15 @@ struct HeaderSection: View {
             VStack(alignment: .leading) {
                 Text("Feeling sick?")
                     .font(.system(size: 18, weight: Font.Weight.bold, design: Font.Design.default))
+                    .foregroundColor(.white)
                 Spacer()
                     .frame(height: 12)
                 Text("If you feel any of the symptoms or feeling sick, please call the free number by clicking on the call button below")
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(nil)
                     .font(.system(size: 14))
+                    .foregroundColor(.white)
             }
             HStack {
                 Button(action: button1Action, label: {
@@ -28,12 +33,14 @@ struct HeaderSection: View {
                         Text("Call for help")
                     }
                     
-                }).buttonStyle(FlatButtonStyle())
+                }).buttonStyle(FlatButtonStyle(color: Color.red))
                 Button(action: button2Action, label: {
                     Text("Fetch Data")
-                }).buttonStyle(OutlineButtonStyle())
+                }).buttonStyle(OutlineButtonStyle(color: Color.white))
             }.padding(.top, 12)
         }
+        .padding()
+        .background(RoundedRectangle(cornerRadius: 25.0).fill(Color.customPurple))
         
     }
 }

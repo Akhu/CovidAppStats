@@ -11,6 +11,8 @@ import SwiftUI
 let buttonShape = RoundedRectangle(cornerRadius: 14.0, style: .continuous)
 
 struct FlatButtonStyle: ButtonStyle {
+    var color: Color = Color.teal
+    
     func makeBody(configuration: Configuration) -> some View {
         
         configuration.label
@@ -19,11 +21,11 @@ struct FlatButtonStyle: ButtonStyle {
             .padding(.vertical, 10)
             .padding(.horizontal, 20)
             .background(configuration.isPressed ? buttonShape.fill(Color.tealShadow) : buttonShape
-                            .fill(Color.teal)                        
+                            .fill(color)
             )
             .shadow(color: configuration.isPressed ? Color.black.opacity(0.1) : Color.black.opacity(0.06), radius: configuration.isPressed ? 2 : 4, x: 0, y: 2)
             .overlay(
-                buttonShape.stroke(Color.teal.opacity(0.4), lineWidth: 2)
+                buttonShape.stroke(color.opacity(0.4), lineWidth: 2)
             )
             .scaleEffect(configuration.isPressed ? 0.99 : 1.0)
             .rotation3DEffect(
@@ -38,14 +40,16 @@ struct FlatButtonStyle: ButtonStyle {
 
 struct OutlineButtonStyle: ButtonStyle {
     
+    var color: Color = Color.customPurple
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
                 .font(.system(Font.TextStyle.callout, design: .rounded))
-                .foregroundColor(configuration.isPressed ? Color.white : Color.black)
+                .foregroundColor(configuration.isPressed ?  Color.black : Color.white)
                 .padding(.vertical, 10)
                 .padding(.horizontal, 20)
-            .background(configuration.isPressed ? buttonShape.fill(Color.black) : buttonShape.fill(Color.white))
-            .overlay(configuration.isPressed ? buttonShape.stroke(lineWidth: 2) : buttonShape.stroke())
+            .background(configuration.isPressed ? buttonShape.fill(color) : buttonShape.fill(color.opacity(0.2)))
+            .overlay(configuration.isPressed ? buttonShape.stroke(color.opacity(0.1), lineWidth: 2) : buttonShape.stroke(color.opacity(0.5), lineWidth: 2))
             
         
     }
@@ -69,7 +73,7 @@ struct ButtonStyle_Previews: PreviewProvider {
                     Image(systemName: "phone")
                     Text("Hello Button")
                 }
-            }).buttonStyle(FlatButtonStyle())
+            }).buttonStyle(FlatButtonStyle(color: Color.red))
         }
     }
 }

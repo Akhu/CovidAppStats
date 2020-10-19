@@ -37,6 +37,7 @@ struct Dashboard: View {
                     
                     Divider()
                         .padding(.vertical, 12.0)
+                        
                     Picker(selection: $timeRangeSelection, label: Text("Picker"))/*@START_MENU_TOKEN@*/{
                         ForEach(TimeRange.allCases) { timeRange in
                             Text("\(String(describing: timeRange).capitalized)").tag(timeRange)
@@ -49,10 +50,14 @@ struct Dashboard: View {
                     
                     GlobalStatNumberSection(deaths: 1200, cases: 2040200, recoveries: 25004).frame(height: 270)
                     
-                    Text("debug: \(String(describing: stats.stats.count))")
-                    Text("Error: \(String(describing: stats.error))")
-                    Text("Range: \(String(describing: timeRangeSelection))")
-                        
+                    //Text("debug: \(String(describing: stats.stats.count))")
+                    //Text("Error: \(String(describing: stats.error))")
+                    //Text("Range: \(String(describing: timeRangeSelection))")
+                    
+                    TipImage()
+                    
+                    
+                    
                 }.padding()
             }
             .navigationTitle("Covid Stats")
@@ -74,7 +79,6 @@ struct Dashboard: View {
                                     }
                             )
         }
-        //Text("")
     }
 }
 

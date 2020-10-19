@@ -27,6 +27,8 @@
 		927EC4FF24BB6C5D0007CB60 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 927EC4FE24BB6C5D0007CB60 /* Preview Assets.xcassets */; };
 		92C9AF4424D46194003BC471 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C9AF4324D46194003BC471 /* ButtonStyles.swift */; };
 		92C9AF4624D4658C003BC471 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C9AF4524D4658C003BC471 /* Color.swift */; };
+		92D46797253DA52E00FFAAE2 /* TipImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D46796253DA52E00FFAAE2 /* TipImage.swift */; };
+		92D4679B253DB0A800FFAAE2 /* Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D4679A253DB0A800FFAAE2 /* Charts.swift */; };
 		92E5692724C490E60080E628 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5692624C490E60080E628 /* Network.swift */; };
 		92E5692E24C49B200080E628 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 92E5692D24C49B200080E628 /* SwiftUICharts */; };
 		92E5693124C49F5E0080E628 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5693024C49F5E0080E628 /* APICaller.swift */; };
@@ -85,6 +87,8 @@
 		927EC50024BB6C5D0007CB60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92C9AF4324D46194003BC471 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		92C9AF4524D4658C003BC471 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		92D46796253DA52E00FFAAE2 /* TipImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipImage.swift; sourceTree = "<group>"; };
+		92D4679A253DB0A800FFAAE2 /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
 		92E5692624C490E60080E628 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		92E5693024C49F5E0080E628 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		92E5693224C4B9C90080E628 /* CountrySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionView.swift; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 			children = (
 				92E8CEF22520F18500FCC6A2 /* Header.swift */,
 				9221D066252E549500299A5D /* GlobalStatNumberSection.swift */,
+				92D46796253DA52E00FFAAE2 /* TipImage.swift */,
+				92D4679A253DB0A800FFAAE2 /* Charts.swift */,
 			);
 			path = Section;
 			sourceTree = "<group>";
@@ -365,6 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92E8CEF32520F18500FCC6A2 /* Header.swift in Sources */,
+				92D46797253DA52E00FFAAE2 /* TipImage.swift in Sources */,
 				925C17C12520D9F1002D03A7 /* DateHelper.swift in Sources */,
 				92E8CEFA2520F99B00FCC6A2 /* NumberCard.swift in Sources */,
 				92E5693824C4BA9B0080E628 /* FileReader.swift in Sources */,
@@ -381,6 +388,7 @@
 				9270AF5424D426A300A2780A /* CountrySelectionRow.swift in Sources */,
 				9270AF5724D426E300A2780A /* Country.swift in Sources */,
 				92C9AF4424D46194003BC471 /* ButtonStyles.swift in Sources */,
+				92D4679B253DB0A800FFAAE2 /* Charts.swift in Sources */,
 				9221D067252E549500299A5D /* GlobalStatNumberSection.swift in Sources */,
 				92E5693324C4B9C90080E628 /* CountrySelectionView.swift in Sources */,
 			);
