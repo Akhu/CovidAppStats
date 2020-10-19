@@ -23,16 +23,14 @@ struct Dashboard: View {
     @State var selectedCountry: Country? = nil
     @ObservedObject var stats: StatisticsOverTime
     @State var timeRangeSelection : TimeRange = .week
-    
-    
-    
+
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack() {
-                    Header { () -> () in
-                        ///
+                    HeaderSection { () -> () in
+                        print("hello")
                     } button2Action: { () -> () in
                         stats.fetchCovidStatByCountryForTimeRange(status: .CONFIRMED, timeRangeInDay: 30, country: selectedCountry)
                     }
@@ -49,14 +47,11 @@ struct Dashboard: View {
                         .font(.system(size: 10, weight: Font.Weight.regular, design: .default))
                         .foregroundColor(.gray)
                     
-                    HStack {
-                        NumberCard(value: 1234567668, label: "Recovery", color: Color.teal, labelColor: Color.tealShadow)
-                        NumberCard(value: 1234567668, label: "Death", color: Color.red, labelColor: Color.redShadow)
-                    }
-                    NumberCard(value: 1234567668, label: "Death", color: Color.red, labelColor: Color.redShadow)
-
+                    GlobalStatNumberSection(deaths: 1200, cases: 2040200, recoveries: 25004).frame(height: 270)
+                    
                     Text("debug: \(String(describing: stats.stats.count))")
                     Text("Error: \(String(describing: stats.error))")
+                    Text("Range: \(String(describing: timeRangeSelection))")
                         
                 }.padding()
             }
@@ -73,7 +68,6 @@ struct Dashboard: View {
                                     })
                                     .transition(.scale)
                                     .id("countrySelected" + "\(selectedCountry?.name ?? "Worldwide")")
-                                    .buttonStyle(OutlineButtonStyle())
                                     .sheet(isPresented: $countrySelectionOpen) {
                                         CountrySelectionView(countrySelectionOpen: $countrySelectionOpen, selectedCountry: $selectedCountry)
                                             .padding()
@@ -87,8 +81,8 @@ struct Dashboard: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Dashboard(stats: StatisticsOverTime())
-        VStack {
-            MultiLineChartView(data: [([8,32,11,23,40,28], GradientColors.green), ([90,99,78,111,70,60,77], GradientColors.purple), ([34,56,72,38,43,100,50], GradientColors.orngPink)], title: "Title")
-        }
+//        VStack {
+//            MultiLineChartView(data: [([8,32,11,23,40,28], GradientColors.green), ([90,99,78,111,70,60,77], GradientColors.purple), ([34,56,72,38,43,100,50], GradientColors.orngPink)], title: "Title")
+//        }
     }
 }

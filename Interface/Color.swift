@@ -12,8 +12,8 @@ extension Color {
     
     static let teal = Color("teal")
     static let tealShadow = Color("teal-shadow")
-    static let red = Color("red")
+    static let customRed = Color("custom-red")
     static let redShadow = Color("red-shadow")
-    static let purple = Color("purple")
+    static let customPurple = Color("custom-purple")
     static let purpleShadow = Color("purple-shadow")
 }

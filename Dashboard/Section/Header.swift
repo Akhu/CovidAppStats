@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Header: View {
+struct HeaderSection: View {
     let button1Action: () -> ()
     let button2Action: () -> ()
     
@@ -38,11 +38,11 @@ struct Header: View {
     }
 }
 
-struct Header_Previews: PreviewProvider {
+struct HeaderSection_Previews: PreviewProvider {
     static var previews: some View {
-        Header { () -> (Void) in
+        HeaderSection { () -> () in
             print("hello World")
-        } button2Action: { () -> (Void) in
+        } button2Action: { () -> () in
             print("goodbye world")
         }
 
