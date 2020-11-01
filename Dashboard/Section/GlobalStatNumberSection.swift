@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct GlobalStatNumberSection: View {
+    var deaths: Double?
+    var cases: Double?
+    var recoveries: Double?
     
-    let deaths: Int
-    let cases: Int
-    let recoveries: Int
     
     var body: some View {
         VStack {
@@ -29,8 +29,12 @@ struct GlobalStatNumberSection: View {
 }
 
 struct GlobalStatNumberSection_Previews: PreviewProvider {
+    @State static var deaths = 12000394.0
+    @State static var cases = 2947918742.0
+    @State static var recoveries = 294802032.0
+    
     static var previews: some View {
-        GlobalStatNumberSection(deaths: 1200, cases: 2040200, recoveries: 25004)
+        GlobalStatNumberSection(deaths: deaths, cases: cases, recoveries: recoveries)
             .padding(8)
     }
 }

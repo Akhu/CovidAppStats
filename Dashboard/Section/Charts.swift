@@ -9,15 +9,18 @@ import SwiftUI
 import SwiftUICharts
 
 struct Charts: View {
-    let customStyle = ChartStyle(backgroundColor: Color.white, accentColor: Color.customPurple, gradientColor: GradientColors.green, textColor: Color.black, legendTextColor: Color.red, dropShadowColor: Color.purple)
+    let customStyle = ChartStyle(backgroundColor: Color.blue, accentColor: Color.customPurple, gradientColor: GradientColors.green, textColor: Color.black, legendTextColor: Color.black, dropShadowColor: Color.purple )
     var body: some View {
         VStack {
-            LineView(data: [8.0,32,11,23,40,28], title: "Title", style: customStyle)
-                
-            MultiLineChartView(
-                data: [([8,32,11,23,40,28], GradientColors.green), ([90,99,78,111,70,60,77], GradientColors.purple), ([34,56,72,38,43,100,50], GradientColors.orngPink)], title: "Title",
-                style: customStyle, dropShadow: false)
-        }
+            GeometryReader { geo in
+                BarChartView(data: ChartData(values: [("2018 Q4",63150), ("2019 Q1",50900), ("2019 Q2",77550), ("2019 Q3",79600), ("2019 Q4",92550),("2018 Q4",63150), ("2019 Q1",50900), ("2019 Q2",77550), ("2019 Q3",79600), ("2019 Q4",92550), ("2018 Q4",63150), ("2019 Q1",50900), ("2019 Q2",77550), ("2019 Q3",79600), ("2019 Q4",92550), ("2018 Q4",63150), ("2019 Q1",50900), ("2019 Q2",77550), ("2019 Q3",79600), ("2019 Q4",92550)]), title: "Sales", legend: "Quarterly", style: customStyle, form: ChartForm.extraLarge, dropShadow: false)
+                    .frame(width: geo.size.width, height: 500)
+                    .background(
+                        RoundedRectangle(cornerRadius: 25.0)
+                            .fill(Color.blue.opacity(0.2))
+                    ).frame(width: geo.size.width, height: geo.size.height)
+            }
+        }.padding()
     }
 }
 

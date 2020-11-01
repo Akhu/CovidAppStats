@@ -21,8 +21,9 @@ struct TipImage: View {
                 Text(title)
                     .font(.headline)
                     .multilineTextAlignment(.leading)
+                
             }
-            HStack {
+            HStack(spacing: 16) {
                 Image(illustration)
                 Text(content)
                     .lineLimit(nil)

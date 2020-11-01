@@ -32,7 +32,12 @@ struct Dashboard: View {
                     HeaderSection { () -> () in
                         print("hello")
                     } button2Action: { () -> () in
-                        stats.fetchCovidStatByCountryForTimeRange(status: .CONFIRMED, timeRangeInDay: 30, country: selectedCountry)
+                        if let country = selectedCountry {
+                            stats.fetchCovidStatByCountryForTimeRange(status: .CONFIRMED, timeRangeInDay: 30, country: country)
+                        } else {
+                            stats.fetchCovidStatWorldAllTime()
+                        }
+                        
                     }
                     
                     Divider()
@@ -42,15 +47,24 @@ struct Dashboard: View {
                         ForEach(TimeRange.allCases) { timeRange in
                             Text("\(String(describing: timeRange).capitalized)").tag(timeRange)
                         }
-                    }.pickerStyle(SegmentedPickerStyle())
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .disabled(selectedCountry == nil)
                     
                     Text("Last update: \(stats.lastUpdate?.dateAndHourToDisplayFormat() ?? "Never")")
-                        .font(.system(size: 10, weight: Font.Weight.regular, design: .default))
+                        .font(.system(size: 12, weight: Font.Weight.regular, design: .default))
                         .foregroundColor(.gray)
                     
-                    GlobalStatNumberSection(deaths: 1200, cases: 2040200, recoveries: 25004).frame(height: 270)
+                    if let _ = selectedCountry {
+                        GlobalStatNumberSection(deaths: 15423, cases: 2040200, recoveries: 25004).frame(height: 270)
+                    } else {
+//                        GlobalStatNumberSection(test: "\(stats.lastUpdate?.dateAndHourToDisplayFormat() ?? "CACA")", deaths: 15423, cases: 2040200, recoveries: 25004).frame(height: 270)
+                        GlobalStatNumberSection(deaths: stats.worldStat.totalDeaths, cases: stats.worldStat.totalConfirmed, recoveries: stats.worldStat.totalRecovered).frame(height: 270)
+                            .redacted(reason: stats.isFetching ? .placeholder : .init())
+                    }
                     
-                    //Text("debug: \(String(describing: stats.stats.count))")
+                    
+                    Text("debug: \(String(selectedCountry?.ISO2 ?? "Caca"))")
                     //Text("Error: \(String(describing: stats.error))")
                     //Text("Range: \(String(describing: timeRangeSelection))")
                     
@@ -62,21 +76,7 @@ struct Dashboard: View {
             }
             .navigationTitle("Covid Stats")
             .navigationBarItems(trailing:
-                                    Button(action: {
-                                        countrySelectionOpen.toggle()
-                                    }, label: {
-                                        withAnimation {
-                                            Text(selectedCountry?.emoji ?? "🌍") + Text(" ") +
-                                            Text(selectedCountry?.name.capitalized ?? "Worldwide")
-                                                    .font(.callout)
-                                        }
-                                    })
-                                    .transition(.scale)
-                                    .id("countrySelected" + "\(selectedCountry?.name ?? "Worldwide")")
-                                    .sheet(isPresented: $countrySelectionOpen) {
-                                        CountrySelectionView(countrySelectionOpen: $countrySelectionOpen, selectedCountry: $selectedCountry)
-                                            .padding()
-                                    }
+                                    TrailingNavigationBarItem(selectedCountry: $selectedCountry, countrySelectionOpen: $countrySelectionOpen)
                             )
         }
     }
@@ -90,3 +90,5 @@ struct ContentView_Previews: PreviewProvider {
 //        }
     }
 }
+
+

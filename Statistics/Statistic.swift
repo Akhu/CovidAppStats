@@ -30,8 +30,8 @@ struct GlobalStatLive: Codable {
 }
 
 struct WorldStatLive: Codable {
-    let totalConfirmed, totalDeaths, totalRecovered: Int?
-
+    let totalConfirmed, totalDeaths, totalRecovered: Double?
+    
     enum CodingKeys: String, CodingKey {
         case totalConfirmed = "TotalConfirmed"
         case totalDeaths = "TotalDeaths"
