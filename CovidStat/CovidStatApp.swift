@@ -11,7 +11,7 @@ import SwiftUI
 struct CovidStatApp: App {
     var body: some Scene {
         WindowGroup {
-            Dashboard(stats: StatisticsOverTime())
+            Dashboard(statisticsManager: StatisticsOverTime())
         }
     }
 }

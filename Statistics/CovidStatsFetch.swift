@@ -8,10 +8,10 @@
 import Foundation
 import Combine
 
-enum CaseStatus: String {
-    case CONFIRMED
-    case DEATHS
-    case RECOVERED
+public enum CaseStatus: String {
+    case confirmed
+    case deaths
+    case recovered
 }
 
 struct WorldStat {
@@ -20,9 +20,11 @@ struct WorldStat {
     let totalRecovered : Int
 }
 
-class StatisticsOverTime : ObservableObject {
+public class StatisticsOverTime : ObservableObject {
     
-    @Published var fetchedStats = [GlobalStatLive]()
+    public init(){}
+    
+    @Published var fetchedStats: GlobalStatistics?
     @Published var worldStat = WorldStatLive(totalConfirmed: 152, totalDeaths: 561, totalRecovered: 10)
     @Published var error : Error? = nil
     @Published var isFetching : Bool = true
@@ -31,54 +33,16 @@ class StatisticsOverTime : ObservableObject {
     
     var cancellable : Set<AnyCancellable> = Set()
     
-    func fetchCovidStatWorldAllTime() {
-        var urlComponents = URLComponents()
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.covid19api.com"
-        urlComponents.path = "/world/total"
-        
-        /*urlComponents.queryItems = [
-         URLQueryItem(name: "from", value: ISO8601DateFormatter().string(from: dateFrom)),
-         URLQueryItem(name: "to", value: ISO8601DateFormatter().string(from: dateTo))
-         ]*/
-        
-        print(urlComponents.url?.absoluteURL)
-        guard let url = urlComponents.url else { return }
-        
-        let jsonDecoder = JSONDecoder()
-        jsonDecoder.dateDecodingStrategy = .iso8601
-        fetch(url: url)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(let catchedError):
-                    print(catchedError.localizedDescription)
-                    self.error = catchedError
-                    break
-                case .finished:
-                    self.error = nil
-                    break
-                }
-            }, receiveValue: { (worldStat: WorldStatLive) in
-                self.lastUpdate = Date()
-                self.worldStat = worldStat
-                self.isFetching = false
-            })
-            .store(in: &cancellable)
-    }
+    public func fetchCovidStatByCountry(forTimeRange timeRangeInDay: Int, andCountry country: String) {
+        //This f*cking API only work if Hour, Minutes and second are set to 0...
+        let dateTo = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+        let dateFrom = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: dateTo.currentDateLessDays(daysToRemove: timeRangeInDay))!
     
-    func fetchCovidStatByCountryForTimeRange(status: CaseStatus, timeRangeInDay : Int, country: Country?) {
-        
-        let dateTo = Date()
-        let dateFrom = dateTo.currentDateLessDays(daysToRemove: 30)
-        
-        guard let unWrappedCountry = country else { return }
-            
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.covid19api.com"
-        urlComponents.path = "/total/country/\(unWrappedCountry.ISO2)"
-        ///status/\(status.rawValue.lowercased())
+        urlComponents.path = "/total/country/\(country)"
+        
         urlComponents.queryItems = [
             URLQueryItem(name: "from", value: ISO8601DateFormatter().string(from: dateFrom)),
             URLQueryItem(name: "to", value: ISO8601DateFormatter().string(from: dateTo))
@@ -100,7 +64,7 @@ class StatisticsOverTime : ObservableObject {
                 //print(String(data: data, encoding: .utf8))
                 return data
             }
-            .decode(type: [GlobalStatLive].self, decoder: jsonDecoder)
+            .decode(type: [DailyStatistic].self, decoder: jsonDecoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -113,13 +77,66 @@ class StatisticsOverTime : ObservableObject {
                     break
                 }
             }, receiveValue: { statData in
-                self.fetchedStats = statData
+                let globalStatistics = GlobalStatistics(days: statData)
+                globalStatistics.computeTrends()
+                self.fetchedStats = globalStatistics
                 self.lastUpdate = Date()
                 self.isFetching = false
             })
             .store(in: &cancellable)
-    
     }
     
+    public func fetchCovidStatByCountryForTimeRange(forStatus status: CaseStatus, timeRangeInDay: Int, country: String) {
+        //This f*cking API only work if Hour, Minutes and second are set to 0...
+        let dateTo = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+        let dateFrom = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: dateTo.currentDateLessDays(daysToRemove: 30))!
+    
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.covid19api.com"
+        urlComponents.path = "/total/country/\(country)/status/\(status)"
+        
+        urlComponents.queryItems = [
+            URLQueryItem(name: "from", value: ISO8601DateFormatter().string(from: dateFrom)),
+            URLQueryItem(name: "to", value: ISO8601DateFormatter().string(from: dateTo))
+        ]
+        
+        print(urlComponents.url?.absoluteURL)
+        guard let url = urlComponents.url else { return }
+        
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.dateDecodingStrategy = .iso8601
+        
+        URLSession.shared.dataTaskPublisher(for: url)
+            .tryMap { data, response -> Data in
+                guard let httpResponse = response as? HTTPURLResponse,
+                      httpResponse.statusCode == 200 else {
+                    print("invalid status")
+                    throw NSError()
+                }
+                //print(String(data: data, encoding: .utf8))
+                return data
+            }
+            .decode(type: [DailyStatistic].self, decoder: jsonDecoder)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let catchedError):
+                    print(catchedError)
+                    self.error = catchedError
+                    break
+                case .finished:
+                    self.error = nil
+                    break
+                }
+            }, receiveValue: { statData in
+                //TODO : Calculate Trends https://colab.research.google.com/drive/1q9i1twdunlecC6ml_kbjl4PyCavCWQ1A
+                //deductTrends(data: statData)
+               // self.fetchedStats = statData
+                self.lastUpdate = Date()
+                self.isFetching = false
+            })
+            .store(in: &cancellable)
+    }
 }
 

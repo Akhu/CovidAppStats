@@ -13,12 +13,20 @@ struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), configuration: ConfigurationIntent())
     }
-
+    
+    //Placeholder user when user try to add the widget, some dummy / default data goes here
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         let entry = SimpleEntry(date: Date(), configuration: configuration)
         completion(entry)
     }
-
+    
+    
+    /*
+     Policies
+     atEnd = When system run out of entries in the timeline, it will execute again "getTimeline"
+     never = App must trigger a manual reload for this one
+     after = Update the timeline at a certain time
+     */
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
 

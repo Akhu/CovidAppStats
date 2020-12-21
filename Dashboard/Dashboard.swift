@@ -21,28 +21,29 @@ enum TimeRange: Identifiable, CaseIterable {
 struct Dashboard: View {
     @State var countrySelectionOpen = false
     @State var selectedCountry: Country? = nil
-    @ObservedObject var stats: StatisticsOverTime
+    @ObservedObject var statisticsManager: StatisticsOverTime
     @State var timeRangeSelection : TimeRange = .week
+    @State var informationSheetOpen = false
 
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack() {
-                    HeaderSection { () -> () in
-                        print("hello")
-                    } button2Action: { () -> () in
-                        if let country = selectedCountry {
-                            stats.fetchCovidStatByCountryForTimeRange(status: .CONFIRMED, timeRangeInDay: 30, country: country)
-                        } else {
-                            stats.fetchCovidStatWorldAllTime()
-                        }
-                        
-                    }
+                    //Text("debug: \(String(selectedCountry?.ISO2 ?? "Caca"))")
+                    //Text("Error: \(String(describing: stats.error))")
+                    //Text("Range: \(String(describing: timeRangeSelection))")
+                    HeaderSection(button1Action: {
+                            if let country = selectedCountry {
+                                self.statisticsManager.fetchCovidStatByCountry(forTimeRange: 60, andCountry: "USA")
+                            } else {
+                                self.statisticsManager.fetchCovidStatByCountry(forTimeRange: 60, andCountry: "USA")
+                            }
+                    }, button2Action: { informationSheetOpen.toggle() })
+                    .sheet(isPresented: $informationSheetOpen) { InformationSheetCovid() }
                     
                     Divider()
                         .padding(.vertical, 12.0)
-                        
                     Picker(selection: $timeRangeSelection, label: Text("Picker"))/*@START_MENU_TOKEN@*/{
                         ForEach(TimeRange.allCases) { timeRange in
                             Text("\(String(describing: timeRange).capitalized)").tag(timeRange)
@@ -51,27 +52,17 @@ struct Dashboard: View {
                     .pickerStyle(SegmentedPickerStyle())
                     .disabled(selectedCountry == nil)
                     
-                    Text("Last update: \(stats.lastUpdate?.dateAndHourToDisplayFormat() ?? "Never")")
+                    Text("Last update: \(statisticsManager.lastUpdate?.dateAndHourToDisplayFormat() ?? "Never")")
                         .font(.system(size: 12, weight: Font.Weight.regular, design: .default))
                         .foregroundColor(.gray)
                     
                     if let _ = selectedCountry {
                         GlobalStatNumberSection(deaths: 15423, cases: 2040200, recoveries: 25004).frame(height: 270)
                     } else {
-//                        GlobalStatNumberSection(test: "\(stats.lastUpdate?.dateAndHourToDisplayFormat() ?? "CACA")", deaths: 15423, cases: 2040200, recoveries: 25004).frame(height: 270)
-                        GlobalStatNumberSection(deaths: stats.worldStat.totalDeaths, cases: stats.worldStat.totalConfirmed, recoveries: stats.worldStat.totalRecovered).frame(height: 270)
-                            .redacted(reason: stats.isFetching ? .placeholder : .init())
+                        GlobalStatNumberSection(deaths: statisticsManager.worldStat.totalDeaths, cases: statisticsManager.worldStat.totalConfirmed, recoveries: statisticsManager.worldStat.totalRecovered).frame(height: 270)
+                            .redacted(reason: statisticsManager.isFetching ? .placeholder : .init())
                     }
-                    
-                    
-                    Text("debug: \(String(selectedCountry?.ISO2 ?? "Caca"))")
-                    //Text("Error: \(String(describing: stats.error))")
-                    //Text("Range: \(String(describing: timeRangeSelection))")
-                    
-                    TipImage()
-                    
-                    
-                    
+                    TitleDescriptionAction(action: {}, description: "Fake news and myth can be dangerous too, try to keep you informed from trusted sources. Don't hesitate to mix sources and informations.", title: "Fighting fake news and myth", icon: Image(systemName: "ear.trianglebadge.exclamationmark"), buttonIcon: Image(systemName: "ear.badge.checkmark"), buttonText: "Myth busting about COVID-19")
                 }.padding()
             }
             .navigationTitle("Covid Stats")
@@ -79,12 +70,15 @@ struct Dashboard: View {
                                     TrailingNavigationBarItem(selectedCountry: $selectedCountry, countrySelectionOpen: $countrySelectionOpen)
                             )
         }
+        .onAppear(perform: {
+            self.statisticsManager.fetchCovidStatByCountry(forTimeRange: 60, andCountry: "USA")
+        })
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        Dashboard(stats: StatisticsOverTime())
+        Dashboard(statisticsManager: StatisticsOverTime())
 //        VStack {
 //            MultiLineChartView(data: [([8,32,11,23,40,28], GradientColors.green), ([90,99,78,111,70,60,77], GradientColors.purple), ([34,56,72,38,43,100,50], GradientColors.orngPink)], title: "Title")
 //        }

@@ -12,15 +12,16 @@ let buttonShape = RoundedRectangle(cornerRadius: 14.0, style: .continuous)
 
 struct FlatButtonStyle: ButtonStyle {
     var color: Color = Color.teal
+    var textColor: Color = Color.white
     
     func makeBody(configuration: Configuration) -> some View {
         
         configuration.label
             .font(.system(Font.TextStyle.callout, design: .rounded))
-            .foregroundColor(.white)
+            .foregroundColor(textColor)
             .padding(.vertical, 10)
             .padding(.horizontal, 20)
-            .background(configuration.isPressed ? buttonShape.fill(Color.tealShadow) : buttonShape
+            .background(configuration.isPressed ? buttonShape.fill(color.opacity(0.7)) : buttonShape
                             .fill(color)
             )
             .shadow(color: configuration.isPressed ? Color.black.opacity(0.1) : Color.black.opacity(0.06), radius: configuration.isPressed ? 2 : 4, x: 0, y: 2)

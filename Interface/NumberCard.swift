@@ -12,47 +12,85 @@ import SwiftUI
 struct NumberCard: View {
     var value: Double?
     var label: String
+    var evolutionRate: Double = 1.0
     var color: Color
-    var labelColor: Color
+    var increasing: Bool = false
 
     
     var body: some View {
         VStack {
-            
-            GeometryReader { geometry in
-                Text(value?.kmFormatted ?? 0.0.kmFormatted).animation(.spring())
-                    .font(.system(size: geometry.size.height > geometry.size.width ? geometry.size.width * 0.4: geometry.size.height * 0.35, weight: Font.Weight.black, design: .default))
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(EdgeInsets(top: 24, leading: 12, bottom: 24, trailing: 12))
-                    .background(RoundedRectangle(cornerRadius: 14.0, style: .continuous).fill(color))
-                }
+            HStack(alignment: .center) {
                 Text(label)
-                    .font(.system(size: 14, weight: .medium, design: .default))
-                    .foregroundColor(.white)
-                    .padding(12)
-                    .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(labelColor))
-                    .offset(y: -25)
-                    .shadow(color: Color.black.opacity(0.08), radius: 10, x: 0.0, y: 9)
-                    .shadow(color: Color.black.opacity(0.09), radius: 4, x: 0.0, y: 2)
-                    .shadow(color: Color.black.opacity(0.1), radius: 1, x: 0.0, y: 1)
-                    .unredacted()
+                    .fontWeight(.bold)
+                Spacer()
+                Text(value?.kmFormatted ?? 0.0.kmFormatted)
+                    .font(.caption2)
+                    .fontWeight(.semibold)
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 8)
+                    .foregroundColor(Color(#colorLiteral(red: 0.5411764706, green: 0.5411764706, blue: 0.5411764706, alpha: 1)))
+                    .background(RoundedRectangle(cornerRadius: 50.0)
+                                    .foregroundColor(Color(#colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9725490196, alpha: 1))))
+            }
+                
+            VStack(alignment: .center) {
+                HStack {
+                    Image(systemName: increasing ? "arrow.up.right" : "arrow.down.right")
+                        .font(.system(size: 24))
+                    Text(evolutionRate.kmFormatted)
+                        .font(.title)
+                        .fontWeight(.heavy)
+                    Text("pts")
+                        .font(.caption2)
+                        
                 }
+                .foregroundColor(color)
+                Spacer()
+                    .frame(height: 6)
+                Text("\(label) rate is ")
+                    .font(.caption2)
+                    .foregroundColor(Color(#colorLiteral(red: 0.5411764706, green: 0.5411764706, blue: 0.5411764706, alpha: 1)))
+                    + Text(increasing ? "increasing" : "decreasing")
+                        .foregroundColor(Color(#colorLiteral(red: 0.5411764706, green: 0.5411764706, blue: 0.5411764706, alpha: 1)))
+                        .font(.caption2)
+                        .bold()
+            }
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, alignment: .topLeading)
+            .padding(.vertical, 18)
+            .padding(.horizontal, 12)
+            .overlay(RoundedRectangle(cornerRadius: 14)
+                        .stroke(Color(#colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)), style: StrokeStyle(lineWidth: 0.5)))
+            .background(RoundedRectangle(cornerRadius: 14.0)
+                            .foregroundColor(.white)
+                            .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0.0, y: 4.0))
+            }
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
         }
 }
 
 struct SwiftUIView_Previews: PreviewProvider {
     
-    @State static var value1 = 20239.0
-    @State static var value2 = 2516.0
+    @State static var value1 = 202239.0
+    @State static var value2 = 25126.0
     
     static var previews: some View {
-        HStack {
-            NumberCard(value: value1, label: "Recovery", color: Color.teal, labelColor: Color.tealShadow)
-                
-            NumberCard(value: value2, label: "Recovery", color: Color.teal, labelColor: Color.tealShadow)
+        VStack {
+            
+            HStack {
+                NumberCard(value: value1, label: "Deaths", evolutionRate: 3.9, color: Color.hardRed)
+                    
+                NumberCard(value: value2, label: "Recovery", evolutionRate: 103.5, color: Color.hardGreen)
+            }
+            HStack {
+                NumberCard(value: value1, label: "Deaths", evolutionRate: 3.9, color: Color.hardRed)
+                    
+                NumberCard(value: value2, label: "Recovery", evolutionRate: 103.5, color: Color.hardGreen)
+            }
+           // NumberCard(value: value2, label: "Recovery", evolutionRate: -1.3, color: Color.mainPurple)
+            
         }
-        .frame(height: 130)
+        .previewDevice("iPhone 12")
+        .frame(height: 260)
         .padding()
         
     }

@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct TipImage: View {
+struct TipViewWithImage: View {
     
-    var illustration: String = "washHands"
+    var illustration: String = "wash_hands"
     var title = "Wash your hands frequently"
     var icon = "hand.raised"
     var content = "Wash your hands often with soap and water for at least 20 seconds especially after you have been in a public place."
@@ -37,6 +37,6 @@ struct TipImage: View {
 
 struct TipImage_Previews: PreviewProvider {
     static var previews: some View {
-        TipImage()
+        TipViewWithImage()
     }
 }

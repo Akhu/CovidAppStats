@@ -29,18 +29,20 @@ struct HeaderSection: View {
             HStack {
                 Button(action: button1Action, label: {
                     HStack {
-                        Image(systemName: "phone")
-                        Text("Call for help")
+                        Image(systemName: "heart.text.square")
+                        Text("Symptoms")
                     }
-                    
-                }).buttonStyle(FlatButtonStyle(color: Color.red))
+                }).buttonStyle(FlatButtonStyle(color: Color.lightPurple))
                 Button(action: button2Action, label: {
-                    Text("Fetch Data")
-                }).buttonStyle(OutlineButtonStyle(color: Color.white))
+                    HStack {
+                        Image(systemName: "hand.raised")
+                        Text("Stop Covid-19")
+                    }
+                }).buttonStyle(FlatButtonStyle(color: Color.beige, textColor: Color.brown))
             }.padding(.top, 12)
         }
         .padding()
-        .background(RoundedRectangle(cornerRadius: 25.0).fill(Color.customPurple))
+        .background(RoundedRectangle(cornerRadius: 25.0).fill(Color.mainPurple))
         
     }
 }

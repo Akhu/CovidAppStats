@@ -18,4 +18,15 @@ extension Double {
         
         return String(format: "%.0f", locale: Locale.current, self)
     }
+    
+    var kmFormattedDouble: Double {
+        if self >= 10000, self <= 999999 {
+            return self/1000
+        }
+        if self > 999999 {
+            return self/1000000
+        }
+        
+        return self
+    }
 }
