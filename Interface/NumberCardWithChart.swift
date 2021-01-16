@@ -41,7 +41,6 @@ struct NumberCardWithChart: View {
                             .fontWeight(.heavy)
                         Text("pts")
                             .font(.caption2)
-                            
                     }
                     .foregroundColor(color)
                     Spacer()

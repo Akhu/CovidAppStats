@@ -12,17 +12,21 @@ struct GlobalStatNumberSection: View {
     var cases: Double?
     var recoveries: Double?
     
+    var deathRate: Double
+    var caseRate: Double
+    var recoveryRate: Double
+    
     
     var body: some View {
         VStack {
             HStack {
-                NumberCard(value: recoveries, label: "Recovery", color: Color.hardGreen)
-                NumberCard(value: deaths, label: "Death", color: Color.hardRed)
+                NumberCard(value: recoveries, label: "Recovery", evolutionRate: recoveryRate, color: Color.hardGreen)
+                NumberCard(value: deaths, label: "Death", evolutionRate: deathRate, color: Color.hardRed)
             }
             Spacer()
                 .frame(height: 0)
             //Todo : Bigger version and that take all the space
-            NumberCard(value: cases, label: "Cases", color: Color.mainPurple)
+            NumberCard(value: cases, label: "Cases", evolutionRate: caseRate, color: Color.mainPurple)
                 
         }.frame(maxHeight: 280)
     }
@@ -34,7 +38,10 @@ struct GlobalStatNumberSection_Previews: PreviewProvider {
     @State static var recoveries = 294802032.0
     
     static var previews: some View {
-        GlobalStatNumberSection(deaths: deaths, cases: cases, recoveries: recoveries)
+        GlobalStatNumberSection(
+            deaths: deaths, cases: cases, recoveries: recoveries,
+            deathRate: 1.2,caseRate: 1.4, recoveryRate: 4.0
+        )
             .padding(8)
     }
 }

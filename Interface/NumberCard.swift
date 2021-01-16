@@ -12,7 +12,7 @@ import SwiftUI
 struct NumberCard: View {
     var value: Double?
     var label: String
-    var evolutionRate: Double = 1.0
+    var evolutionRate: Double
     var color: Color
     var increasing: Bool = false
 
@@ -22,6 +22,8 @@ struct NumberCard: View {
             HStack(alignment: .center) {
                 Text(label)
                     .fontWeight(.bold)
+                    
+                    .foregroundColor(Color(#colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.1058823529, alpha: 1)))
                 Spacer()
                 Text(value?.kmFormatted ?? 0.0.kmFormatted)
                     .font(.caption2)
@@ -33,31 +35,33 @@ struct NumberCard: View {
                                     .foregroundColor(Color(#colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9725490196, alpha: 1))))
             }
                 
-            VStack(alignment: .center) {
-                HStack {
+            VStack(alignment: .leading) {
+                HStack(alignment: .lastTextBaseline, spacing: 2) {
                     Image(systemName: increasing ? "arrow.up.right" : "arrow.down.right")
-                        .font(.system(size: 24))
+                        .font(Font.system(size: 24, weight: .bold))
+                    Spacer()
+                        .frame(width: 6, height: 0)
                     Text(evolutionRate.kmFormatted)
-                        .font(.title)
+                        .font(Font.system(size: 32, weight: .bold))
                         .fontWeight(.heavy)
                     Text("pts")
-                        .font(.caption2)
-                        
+                        .font(Font.system(size: 10, weight: .regular, design: .rounded))
                 }
                 .foregroundColor(color)
                 Spacer()
                     .frame(height: 6)
                 Text("\(label) rate is ")
-                    .font(.caption2)
-                    .foregroundColor(Color(#colorLiteral(red: 0.5411764706, green: 0.5411764706, blue: 0.5411764706, alpha: 1)))
+                    .font(Font.system(size: 10, weight: .regular))
+                    .foregroundColor(Color(#colorLiteral(red: 0.4941176471, green: 0.4941176471, blue: 0.537254902, alpha: 1)))
                     + Text(increasing ? "increasing" : "decreasing")
-                        .foregroundColor(Color(#colorLiteral(red: 0.5411764706, green: 0.5411764706, blue: 0.5411764706, alpha: 1)))
-                        .font(.caption2)
+                        .foregroundColor(Color(#colorLiteral(red: 0.4941176471, green: 0.4941176471, blue: 0.537254902, alpha: 1)))
+                        .font(Font.system(size: 10, weight: .regular))
                         .bold()
+                        
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, alignment: .topLeading)
             .padding(.vertical, 18)
-            .padding(.horizontal, 12)
+            .padding(.horizontal, 14)
             .overlay(RoundedRectangle(cornerRadius: 14)
                         .stroke(Color(#colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)), style: StrokeStyle(lineWidth: 0.5)))
             .background(RoundedRectangle(cornerRadius: 14.0)
@@ -70,7 +74,7 @@ struct NumberCard: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     
-    @State static var value1 = 202239.0
+    @State static var value1 = 2022239.0
     @State static var value2 = 25126.0
     
     static var previews: some View {
@@ -79,12 +83,12 @@ struct SwiftUIView_Previews: PreviewProvider {
             HStack {
                 NumberCard(value: value1, label: "Deaths", evolutionRate: 3.9, color: Color.hardRed)
                     
-                NumberCard(value: value2, label: "Recovery", evolutionRate: 103.5, color: Color.hardGreen)
+                NumberCard(value: value2, label: "Recoveries", evolutionRate: 103.5, color: Color.hardGreen)
             }
             HStack {
                 NumberCard(value: value1, label: "Deaths", evolutionRate: 3.9, color: Color.hardRed)
                     
-                NumberCard(value: value2, label: "Recovery", evolutionRate: 103.5, color: Color.hardGreen)
+                NumberCard(value: value2, label: "Recoveries", evolutionRate: 103.5, color: Color.hardGreen)
             }
            // NumberCard(value: value2, label: "Recovery", evolutionRate: -1.3, color: Color.mainPurple)
             

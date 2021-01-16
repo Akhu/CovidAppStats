@@ -55,12 +55,12 @@ struct Dashboard: View {
                     Text("Last update: \(statisticsManager.lastUpdate?.dateAndHourToDisplayFormat() ?? "Never")")
                         .font(.system(size: 12, weight: Font.Weight.regular, design: .default))
                         .foregroundColor(.gray)
+                    Spacer().frame(height: 24)
                     
                     if let _ = selectedCountry {
-                        GlobalStatNumberSection(deaths: 15423, cases: 2040200, recoveries: 25004).frame(height: 270)
+                        GlobalStatNumberSection(deaths: 20490, cases: 128570, recoveries: 29928401, deathRate: 1.2,caseRate: 1.4, recoveryRate: 4.0)
                     } else {
-                        GlobalStatNumberSection(deaths: statisticsManager.worldStat.totalDeaths, cases: statisticsManager.worldStat.totalConfirmed, recoveries: statisticsManager.worldStat.totalRecovered).frame(height: 270)
-                            .redacted(reason: statisticsManager.isFetching ? .placeholder : .init())
+                        GlobalStatNumberSection(deaths: 20490, cases: 128570, recoveries: 29928401, deathRate: 1.2,caseRate: 1.4, recoveryRate: 4.0)
                     }
                     TitleDescriptionAction(action: {}, description: "Fake news and myth can be dangerous too, try to keep you informed from trusted sources. Don't hesitate to mix sources and informations.", title: "Fighting fake news and myth", icon: Image(systemName: "ear.trianglebadge.exclamationmark"), buttonIcon: Image(systemName: "ear.badge.checkmark"), buttonText: "Myth busting about COVID-19")
                 }.padding()
